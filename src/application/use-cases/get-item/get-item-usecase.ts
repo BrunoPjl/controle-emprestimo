@@ -1,14 +1,19 @@
+import { TipoItem } from "../../../domain/entity/TipoItem";
 import { ItemRepository } from "../../../domain/repository/item-repository";
-import { GetItensInput } from "./get-item-input";
-import { GetItensOutput } from "./get-item-output";
+import { GetItemInput } from "./get-item-input";
+import { GetItemOutput } from "./get-item-output";
 
-export class GetItensUseCase{
+
+export class GetItemUseCase{
 
     constructor(readonly itemRepository: ItemRepository){}
 
-        execute(input: GetItensInput): GetItensOutput{
+        execute(input: GetItemInput): GetItemOutput{
             return{
-                name:''
+                name:'',
+                id: '',
+               
+
             }
 
         }

@@ -1,3 +1,6 @@
-export type GetItensOutput = {
-    name: String;
+
+export type GetItemOutput = {
+    id: string;
+    name: string;
+  
 }

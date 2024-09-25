@@ -1,1 +1,1 @@
-export type GetItensInput = {}
+export type GetItemInput = {}
