@@ -1,8 +1,14 @@
-import { ItemRepository } from "../../../domain/repository/item-repository";
+import { TipoItemRepository } from "../../../domain/repository/tipo-item-repository";
+import { DeleteTipoItemInput } from "./delete-tipoitem-input";
+import { DeleteTipoItemOutput } from "./delete-tipoitem-output";
 
-export class DeleteTipoItemUseCAse{
-constructor(readonly tipoitemRepository: ItemRepository){}
+export class DeleteTipoItemUseCase{
+constructor(readonly tipoitemRepository: TipoItemRepository){}
+execute(input: DeleteTipoItemInput): DeleteTipoItemOutput{
+    return{
+        name:''
+    }
 
-execute(){}
+}
 
 }
