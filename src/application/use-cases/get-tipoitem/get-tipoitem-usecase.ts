@@ -6,9 +6,25 @@ export class GetTipoItemUseCase{
 
     constructor(readonly tipoItemRepository: TipoItemRepository){}
 
-    execute(input: GetTipoItemInput): GetTipoItemOutput{
-        return {
-            name: ''
+    execute(input: GetTipoItemInput): GetTipoItemOutput[]{
+        const listaDeItens = this.tipoItemRepository.getall();
+
+        const output: GetTipoItemOutput[] = [];
+
+        for(const itemdalista of listaDeItens){
+            output.push(
+                {
+                   id: itemdalista.getId(),
+                    name: itemdalista.getName()
+                  
+
+                }
+            )
         }
+
+        return output;
+            
+        
+
     }
 }
