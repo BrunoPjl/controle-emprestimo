@@ -17,14 +17,9 @@ export class GetPersonUseCase{
         for(const itemdalista of listaDeItens){
             output.push(
                 {
-                   id: itemdalista.getId(),
-                    name: itemdalista.getName(),
-                    tipoItem:{
-                        id: itemdalista.getTipoItem().getId(),
-                        name: itemdalista.getTipoItem().getName()
+                    id: itemdalista.getId(),
+                    name: itemdalista.getUserName()
                     }
-
-                }
             )
         }
 
