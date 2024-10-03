@@ -5,6 +5,15 @@ import { TipoItemRepositoryMemory } from './infra/repository/memory/tipoitem-rep
 import { UserController } from './application/controller/user-controler';
 import { UsuarioRepositoryMemory } from './infra/repository/memory/usuario-repository-memory';
 
+import { TipoItemController } from './application/controller/tipo-item-controller';
+import { PersonController } from './application/controller/person-controller';
+import { PessoaRepositoryMemory } from './infra/repository/memory/pessoa-repository-memory';
+
+
+
+
+
+
 const app = express();
 const port = 3004;
 
@@ -18,6 +27,11 @@ const itemController = new ItemController(itemRepositoryMemory, tipoItemReposito
 const usuarioRepositoryMemory = new UsuarioRepositoryMemory()
 const usuarioController = new UserController(usuarioRepositoryMemory)
 
+const tipoItemcontroller = new TipoItemController(tipoItemRepositoryMemory)
+const pessoaRepositoryMemory = new PessoaRepositoryMemory()
+const personController = new PersonController(pessoaRepositoryMemory)
+
+
 app.get('/itens', (request, response)=> {
    response.send( itemController.getAll({}));
 })
@@ -30,8 +44,28 @@ app.get('/usuario', (request, response) =>{
     response.send(usuarioController.getAll({}))
 })
 
+<<<<<<< HEAD
 app.post('/usuario', (request, response) =>{
     response.send(usuarioController.create(request.body))
+=======
+
+app.post('/tipoitem',(request, response) =>{
+    response.send(tipoItemcontroller.create(request.body))
+})
+
+app.get('/tipoitem',(request, response) => {
+    response.send(tipoItemcontroller.getAll({}))
+})
+
+
+app.get('/pessoas',(request, response)=> {
+    response.send(personController.getAll({}))
+});
+
+app.post('/pessoas', (request, response) => {
+    response.send(personController.create(request.body));
+
+>>>>>>> 7bb8994e73813405ff5c5b26afe4be2379db1889
 })
 
 app.listen(port, () => {

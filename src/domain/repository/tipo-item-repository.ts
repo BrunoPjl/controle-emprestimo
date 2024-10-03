@@ -6,3 +6,5 @@ export interface TipoItemRepository{
     create(tipoitem: TipoItem): void;
     update(tipoitem: TipoItem): void;
 }
+
+//beleza sobe

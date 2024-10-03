@@ -7,7 +7,7 @@ export class PessoaRepositoryMemory implements PessoaRepository{
 
     constructor()
     {
-        const pessoa = new Pessoa('Funcionários' ,'33b25da0-efdb-4db8-b855-0670cd818442')
+        
         this.pessoas = [
 
             new Pessoa('Bruno', 'cef9056d-b22f-4152-ad46-332875244183')
@@ -20,10 +20,15 @@ export class PessoaRepositoryMemory implements PessoaRepository{
         return this.pessoas;
     }
     getById(id: string): Pessoa {
-        throw new Error("Method not implemented.");
+        const pessoa = this.pessoas.find(valor => valor.getId() == id)
+        if(!pessoa){
+            throw new Error('pessoa not found')
+        }
+
+        return pessoa;
     }
     create(pessoa: Pessoa): void {
-        throw new Error("Method not implemented.");
+       this.pessoas.push(pessoa);
     }
     update(pessoa: Pessoa): void {
         throw new Error("Method not implemented.");
