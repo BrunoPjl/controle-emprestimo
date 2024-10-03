@@ -2,11 +2,20 @@
 import { UsuarioRepository } from "../../domain/repository/usuario-repository";
 import { CreateUserUseCase } from "../use-cases/create-user/create-user-usecase";
 import { DeleteUserUseCAse } from "../use-cases/delete-user/delete-user-usecase";
+import { GetUseruseCase } from "../use-cases/get-user/get-user-usecase";
 import { UpdateUserUseCase } from "../use-cases/update-user/update-user-usecase";
 
 
 export class UserController{
     constructor(private readonly userRepository: UsuarioRepository){}
+
+
+    getAll(input : any){
+
+        const getUser = new GetUseruseCase(this.userRepository);
+        return getUser.execute(input);
+    
+    }
 
     create(input: any){
 

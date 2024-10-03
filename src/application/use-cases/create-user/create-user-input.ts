@@ -1,6 +1,6 @@
 export type CreateUserInput = {
 
-    tipoItemId: string;
+    userId: string;
     
     }
     

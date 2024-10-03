@@ -1,3 +1,1 @@
-export type CreateUserOutput = {
-    name: String;
-}
+export type CreateUserOutput = {}
