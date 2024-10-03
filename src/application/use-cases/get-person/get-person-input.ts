@@ -1,1 +1,4 @@
-export type GetPersonInput = {}
+export type GetPersonInput = {
+    name: String;
+    id: string;
+}
