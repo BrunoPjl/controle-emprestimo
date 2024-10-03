@@ -1,6 +1,5 @@
 
 import { PessoaRepository } from "../../../domain/repository/pessoa-repository";
-import { GetPeopleInput } from "../get-people/get-people-input";
 import { GetPersonInput } from "./get-person-input";
 import { GetPersonOutput } from "./get-person-output";
 
