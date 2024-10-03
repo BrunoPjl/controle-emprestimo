@@ -18,7 +18,7 @@ export class TipoItemRepositoryMemory implements TipoItemRepository{
 
 
     getall(): TipoItem[] {
-        throw new Error("Method not implemented.");
+        return this.tipos
     }
     getById(id: string): TipoItem {
         const item = this.tipos.find(valor => valor.getId() == id)
@@ -29,7 +29,7 @@ export class TipoItemRepositoryMemory implements TipoItemRepository{
         return item;
     }
     create(tipoitem: TipoItem): void {
-        throw new Error("Method not implemented.");
+       this.tipos.push(tipoitem)
     }
     update(tipoitem: TipoItem): void {
         throw new Error("Method not implemented.");
