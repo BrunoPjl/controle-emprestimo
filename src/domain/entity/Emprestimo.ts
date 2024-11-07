@@ -7,17 +7,17 @@ export class Emprestimo{
 
     // declaração fora do construtor
     private item: Item;
-    private id: string;
-    private dataemprestimo: Date;
+    readonly id: string;
+  
     //data devolução opcional ou nulo ou undefined
-    private datadevolucao?: Date  ;
+   
     private pessoa: Pessoa;
     private usuario: Usuario;
 
     
  // método que instancia objeto quando chamado
  // ? pode ser nulo ou não passado
- constructor( usuario: Usuario,pessoa: Pessoa,item: Item,dataemprestimo: Date,datadevolucao?: Date,id?: string){
+ constructor( usuario: Usuario,pessoa: Pessoa,item: Item,readonly dataemprestimo: Date, readonly datadevolucao?: Date,id?: string){
     this.dataemprestimo = dataemprestimo;
     this.datadevolucao = datadevolucao;
     this.usuario = usuario;

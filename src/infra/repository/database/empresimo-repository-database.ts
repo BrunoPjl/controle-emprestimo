@@ -109,12 +109,44 @@ export default class EmprestimoRepositoryDatabase implements EmprestimoRepositor
     }
 
 
-    create(emprestimo: Emprestimo): void {
-    throw new Error("Method not implemented.");
-    }      
-    update(emprestimo: Emprestimo): void {
+    async create(emprestimo: Emprestimo): Promise<void> {
+        await this.connection.execute(`
+            insert into emprestimos(id,data_emprestimo, data_devolucao,pessoas_id ,)
+            values ($1, $2, $3)`,
+            [emprestimo.id,emprestimo.dataemprestimo,emprestimo.datadevolucao, emprestimo.getItem]);        
+    }     
+
+
+/*
+  // declaração fora do construtor
+  private item: Item;
+  private id: string;
+  private dataemprestimo: Date;
+  //data devolução opcional ou nulo ou undefined
+  private datadevolucao?: Date  ;
+  private pessoa: Pessoa;
+  private usuario: Usuario;
+
+  CREATE table emprestimos (
+id uuid NOT NULL,
+data_emprestimo TIMESTAMP,
+data_devolucao TIMESTAMP,
+pessoas_id uuid,
+FOREIGN KEY (pessoas_id) REFERENCES pessoas (id),
+tipos_item_id uuid,
+FOREIGN KEY (tipos_item_id) REFERENCES tipos_item(id),
+usuarios_id uuid,
+FOREIGN KEY (usuarios_id) REFERENCES usuarios(id),
+itens_id uuid,
+FOREIGN KEY (itens_id) REFERENCES itens(id),
+CONSTRAINT emprestimos_pk PRIMARY KEY (id)
+);
+  
+  */
+
+/*    update(emprestimo: Emprestimo): void {
     throw new Error("Method not implemented.");
     }
-
+*/
    
 }
