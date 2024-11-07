@@ -1,5 +1,5 @@
-import { Item } from "../../../domain/entity/item";
-import { ItemType } from "../../../domain/entity/item-type";
+import { Item } from "../../../domain/entity/Item";
+import { TipoItem } from "../../../domain/entity/TipoItem";
 import { ItemRepository } from "../../../domain/repository/item-repository";
 import { Connection } from "../../database/connection";
 
@@ -17,7 +17,7 @@ export default class ItemRepositoryDatabase implements ItemRepository {
             left join tipos_item ti on i.tipo_item_id = ti.id`);
 
         for (const itemData of itensData) {
-            const tipoItem = new ItemType(
+            const tipoItem = new TipoItem(
                 itemData.nome_tipoitem,
                 itemData.tipo_item_id
             )
@@ -47,7 +47,7 @@ export default class ItemRepositoryDatabase implements ItemRepository {
             throw new Error('Item não encontrado');
         }
 
-        const tipoItem = new ItemType(
+        const tipoItem = new TipoItem(
             itemData.nome_tipoitem,
             itemData.tipo_item_id
         )
@@ -64,7 +64,7 @@ export default class ItemRepositoryDatabase implements ItemRepository {
         await this.connection.execute(`
             insert into itens(id, nome, tipo_item_id)
             values ($1, $2, $3)`,
-            [item.id, item.name, item.getItemType().getId()]);        
+            [item.id, item.name, item.getTipoItem().getId()]);        
     }
 
     async update(item: Item): Promise<void> {
@@ -74,7 +74,7 @@ export default class ItemRepositoryDatabase implements ItemRepository {
             tipo_item_id = $2
             where id = $3
             `,
-            [item.name, item.getItemType().getId(), item.id]);
+            [item.name, item.getTipoItem().getId(), item.id]);
     }
     async delete(id: string): Promise<void> {
         throw new Error("Method not implemented.");
