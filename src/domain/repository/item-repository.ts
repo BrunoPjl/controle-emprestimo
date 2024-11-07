@@ -1,7 +1,9 @@
 import { Item } from "../entity/Item";
+
 export interface ItemRepository{
-    getall(): Item[];
-    getById(id: string): Item;
-    create(item: Item): void;
-    update(item: Item): void;
-}
+    getAll(): Promise<Item[]>;
+    getById(id: string): Promise<Item>;
+    create(item: Item): Promise<void>;
+    update(item: Item): Promise<void>;
+    delete(id: string): Promise<void>;
+    }

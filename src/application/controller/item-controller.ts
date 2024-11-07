@@ -1,29 +1,45 @@
 import { ItemRepository } from "../../domain/repository/item-repository";
+import { RepositoryFactory } from "../../domain/repository/repository-factory";
 import { TipoItemRepository } from "../../domain/repository/tipo-item-repository";
 import { CreateItemUseCase } from "../use-cases/create-item/create-item-usecase";
 import { DeleteItemUseCase } from "../use-cases/delete-item/delete-item-usecase";
 import { GetItensUseCase } from "../use-cases/get-itens/get-itens-usecase";
+import { UpdateItemInput } from "../use-cases/update-item/update-item-input";
 import { UpdateItemUseCase } from "../use-cases/update-item/update-item-usecase";
 
 export class ItemController{
-    constructor(private readonly itemRepository: ItemRepository,
-        private readonly tipoItemRepository: TipoItemRepository
+    constructor(private  itemRepository: ItemRepository,
+        private tipoItemRepository: TipoItemRepository,
+        private repositoryFactory: RepositoryFactory
     ){}
 
-getAll(input : any){
+    async getAll(input: any) {
+        const getItems = new GetItensUseCase(this.itemRepository);
+        return await getItems.execute(input);
+    }
 
-    const getItens = new GetItensUseCase(this.itemRepository);
-    return getItens.execute(input);
+    async getById(id: string) {
+        try {
+            const getItem = new GetItensUseCase(this.itemRepository);
+            return await getItem.execute({id});
+        } catch (e: any) {
+            return {
+                message: e.message
+            }
+        }
+    }
 
-}
-
-
-    create(input: any){
-
-        const createItemUseCase = new CreateItemUseCase(this.itemRepository, this.tipoItemRepository);
-       return  createItemUseCase.execute(input);
-
-
+    async create(input: any){
+        try {
+            const createItemUseCase = new CreateItemUseCase(
+                this.repositoryFactory
+            );
+            return await createItemUseCase.execute(input);
+        } catch (e: any) {
+            return {
+                message: e.message
+            }
+        }
     }
 
     update(input: any){
@@ -31,11 +47,16 @@ getAll(input : any){
         updateItemUseCase.execute(input);
     }
 
-    delete(input: any){
-
-        const deleteItemUseCase  = new DeleteItemUseCase(this.itemRepository);
-        deleteItemUseCase.execute(input);
-
+    delete(id: string) {
+        try {
+            const deleteItem = new DeleteItemUseCase(this.itemRepository);
+            return deleteItem.execute({id});
+        } catch (e: any) {
+            return {
+                message: e.message
+            }
+        }
+        
     }
 
     

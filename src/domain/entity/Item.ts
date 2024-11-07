@@ -4,14 +4,14 @@ import { TipoItem } from './TipoItem';
 export class Item{
 
     // declaração fora do construtor
-    private name: string;
-    private id: string;
+    
+    readonly id: string;
     private tipoitem: TipoItem;
 
  // método que instancia objeto quando chamado
  // ? pode ser nulo ou não passado
- constructor( tipoitem: TipoItem,name: string, id?: string){
-    this.tipoitem = tipoitem;
+ constructor(readonly name: string, tipoItem:TipoItem, id?: string){
+    this.tipoitem = tipoItem;
     this.name = name;
     if(!id){
         id = v4();

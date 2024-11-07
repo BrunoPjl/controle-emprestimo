@@ -2,12 +2,14 @@ import express, { request, response } from 'express';
 import { ItemController } from './application/controller/item-controller';
 import { ItemRepositoryMemory } from './infra/repository/memory/item-repository-memory';
 import { TipoItemRepositoryMemory } from './infra/repository/memory/tipoitem-repository-memory';
-import { UserController } from './application/controller/user-controler';
+import { UserController } from './application/controller/user-controller';
 import { UsuarioRepositoryMemory } from './infra/repository/memory/usuario-repository-memory';
 
 import { TipoItemController } from './application/controller/tipo-item-controller';
 import { PersonController } from './application/controller/person-controller';
 import { PessoaRepositoryMemory } from './infra/repository/memory/pessoa-repository-memory';
+import ItemRepositoryDatabase from './infra/repository/database/item-repository-database';
+import { TipoItemRepositoryDatabase } from './infra/repository/database/item-type-repository-database';
 
 
 
@@ -23,7 +25,7 @@ app.get('/', (request, response)=> {
 })
 const tipoItemRepositoryMemory = new TipoItemRepositoryMemory()
 const itemRepositoryMemory = new ItemRepositoryMemory()
-const itemController = new ItemController(itemRepositoryMemory, tipoItemRepositoryMemory)
+const itemController = new ItemController(ItemRepositoryDatabase, TipoItemRepositoryDatabase, )
 const usuarioRepositoryMemory = new UsuarioRepositoryMemory()
 const usuarioController = new UserController(usuarioRepositoryMemory)
 
@@ -44,10 +46,9 @@ app.get('/usuario', (request, response) =>{
     response.send(usuarioController.getAll({}))
 })
 
-<<<<<<< HEAD
+
 app.post('/usuario', (request, response) =>{
-    response.send(usuarioController.create(request.body))
-=======
+    response.send(usuarioController.create(request.body))})
 
 app.post('/tipoitem',(request, response) =>{
     response.send(tipoItemcontroller.create(request.body))
@@ -65,9 +66,8 @@ app.get('/pessoas',(request, response)=> {
 app.post('/pessoas', (request, response) => {
     response.send(personController.create(request.body));
 
->>>>>>> 7bb8994e73813405ff5c5b26afe4be2379db1889
 })
 
 app.listen(port, () => {
     console.log("servidor iniciado na porta : "+ port)
-})
+});
