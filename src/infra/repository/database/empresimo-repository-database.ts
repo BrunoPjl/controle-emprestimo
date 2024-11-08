@@ -35,7 +35,9 @@ export default class EmprestimoRepositoryDatabase implements EmprestimoRepositor
             )
 
             const pessoa = new Pessoa(
+                emprestimoData.id,
                 emprestimoData.username,
+                emprestimoData.documento
 
             )
 
@@ -88,8 +90,9 @@ export default class EmprestimoRepositoryDatabase implements EmprestimoRepositor
         )
 
         const pessoa = new Pessoa(
+            emprestimoData.id,
             emprestimoData.username,
-
+            emprestimoData.documento
         )
 
         const usuario = new Usuario(

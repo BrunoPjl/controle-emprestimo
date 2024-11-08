@@ -2,29 +2,30 @@ import { v4 }from 'uuid';
 
 export class Pessoa{
 
-    // declaração fora do construtor
-    private username: string;
-    private id: string;
+
+    readonly id: string;
+    readonly documento: string;
     
- // método que instancia objeto quando chamado
- // ? pode ser nulo ou não passado
- constructor( username: string, id?: string){
+ 
+ constructor(readonly username: string, documento: string, id?: string){
 
     this.username = username;
+    this.documento = documento;
     if(!id){
         id = v4();
     }
     this.id = id;
  }
-// método que obtém nome 
+
  getUserName(): string{
     return this.username
 }
-// método que obtém Id
+
 getId(): string{
     return this.id
 }
 
+getDocumento(): string{
+    return this.documento
 }
-
-//beleza sobe
+}
