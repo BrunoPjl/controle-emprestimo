@@ -3,5 +3,5 @@ import { TipoItemRepository } from "./tipo-item-repository";
 
 export interface RepositoryFactory {
     createItemRepository(): ItemRepository
-    createItemTypeRepository(): TipoItemRepository;
+    createTipoItemRepository(): TipoItemRepository;
 }

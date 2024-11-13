@@ -1,37 +1,60 @@
+import { config } from "dotenv";
 import express, { request, response } from 'express';
+import { Connection } from './infra/database/connection';
+import { TipoItemRepository } from "./domain/repository/tipo-item-repository";
 import { ItemController } from './application/controller/item-controller';
-import { ItemRepositoryMemory } from './infra/repository/memory/item-repository-memory';
-import { TipoItemRepositoryMemory } from './infra/repository/memory/tipoitem-repository-memory';
 import { UserController } from './application/controller/user-controller';
-import { UsuarioRepositoryMemory } from './infra/repository/memory/usuario-repository-memory';
-
+import { EmprestimoController } from './application/controller/emprestimo-controller';
 import { TipoItemController } from './application/controller/tipo-item-controller';
 import { PersonController } from './application/controller/person-controller';
-import { PessoaRepositoryMemory } from './infra/repository/memory/pessoa-repository-memory';
+import { RepositoryFactory } from './domain/repository/repository-factory';
+import PessoaRepositoryDatabase from './infra/repository/database/pessoa-repository-database';
+import EmprestimoRepositoryDatabase from './infra/repository/database/empresimo-repository-database';
+import { TipoItemRepositoryDatabase } from './infra/repository/database/tipo-item-repository-database';
+import { PostgresConnection } from './infra/database/postgres-connection';
 import ItemRepositoryDatabase from './infra/repository/database/item-repository-database';
-import { TipoItemRepositoryDatabase } from './infra/repository/database/item-type-repository-database';
+import { DatabaseRepositoryFactory } from "./infra/database/database-repository-factory";
 
-
-
-
-
+config();
 
 const app = express();
 const port = 3004;
 
-app.use(express.json())
+
 app.get('/', (request, response)=> {
     response.send('funciono');
 })
-const tipoItemRepositoryMemory = new TipoItemRepositoryMemory()
-const itemRepositoryMemory = new ItemRepositoryMemory()
-const itemController = new ItemController(ItemRepositoryDatabase, TipoItemRepositoryDatabase, )
-const usuarioRepositoryMemory = new UsuarioRepositoryMemory()
-const usuarioController = new UserController(usuarioRepositoryMemory)
 
-const tipoItemcontroller = new TipoItemController(tipoItemRepositoryMemory)
-const pessoaRepositoryMemory = new PessoaRepositoryMemory()
-const personController = new PersonController(pessoaRepositoryMemory)
+app.use(express.json())
+app.all('*', function (req, res, next) {
+			res.header('Access-Control-Allow-Origin', '*');
+			res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+			res.header('Access-Control-Allow-Headers', 'Content-Type, access-token');
+			next();
+		});
+
+const dadosconexao = {
+	user: process.env.DB_USERNAME || '',
+	password: process.env.DB_PASSWORD || '',
+	database: process.env.DB_DATABASE || '',
+	host: process.env.DB_HOST || '',
+	port: process.env.DB_PORT || ''
+}
+
+console.log(dadosconexao)
+const connectionPostgreSQL = new PostgresConnection(
+	dadosconexao
+);
+const repositoryFactory = new DatabaseRepositoryFactory(connectionPostgreSQL);
+
+const repositoryFactory = new DatabaseRepositoryFactory(connectionPostgreSQL);
+
+const itemController = new ItemController(repositoryFactory);
+
+
+
+
+
 
 
 app.get('/itens', (request, response)=> {
@@ -42,31 +65,7 @@ app.post('/itens', (request, response) => {
     response.send(itemController.create(request.body));
 })
 
-app.get('/usuario', (request, response) =>{
-    response.send(usuarioController.getAll({}))
-})
 
-
-app.post('/usuario', (request, response) =>{
-    response.send(usuarioController.create(request.body))})
-
-app.post('/tipoitem',(request, response) =>{
-    response.send(tipoItemcontroller.create(request.body))
-})
-
-app.get('/tipoitem',(request, response) => {
-    response.send(tipoItemcontroller.getAll({}))
-})
-
-
-app.get('/pessoas',(request, response)=> {
-    response.send(personController.getAll({}))
-});
-
-app.post('/pessoas', (request, response) => {
-    response.send(personController.create(request.body));
-
-})
 
 app.listen(port, () => {
     console.log("servidor iniciado na porta : "+ port)

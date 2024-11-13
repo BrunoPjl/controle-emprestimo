@@ -117,7 +117,9 @@ export default class EmprestimoRepositoryDatabase implements EmprestimoRepositor
             insert into emprestimos(id,data_emprestimo, data_devolucao,pessoas_id ,)
             values ($1, $2, $3)`,
             [emprestimo.id,emprestimo.dataemprestimo,emprestimo.datadevolucao, emprestimo.getItem]);        
-    }     
+    }    
+    
+
 
 
 /*

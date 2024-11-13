@@ -1,6 +1,5 @@
 import { TipoItemRepository } from "../../domain/repository/tipo-item-repository";
 import { CreateTipoItemUseCase } from "../use-cases/create-tipoitem/create-tipoitem-usecase";
-import { DeleteTipoItemUseCase } from "../use-cases/delete-tipoitem /delete-tipoitem-usecase";
 import { GetTipoItensUseCase } from "../use-cases/get-tipoitens/get-tipoitens-usecase";
 import { UpdateTipoItemUseCase } from "../use-cases/update-tipoitem/update-tipoitem-usecase";
 
@@ -26,11 +25,7 @@ export class TipoItemController{
         updateTipoItemUseCase.execute(input);
     }
 
-    delete(input: any){
-
-        const deleteTipoItemUseCase = new DeleteTipoItemUseCase(this.tipoitemRepository);
-        deleteTipoItemUseCase.execute(input);
-    }
+   
 
     
 

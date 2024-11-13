@@ -3,34 +3,26 @@ import { GetItensInput } from "./get-itens-input";
 import { GetItensOutput } from "../get-itens/get-itens-output";
 
 export class GetItensUseCase{
-
     constructor(readonly itemRepository: ItemRepository){}
 
-        execute(input: GetItensInput): GetItensOutput[]{
-            const listaDeItens = this.itemRepository.getall();
+    async execute(input: GetItensInput): Promise<GetItensOutput[]> {
+        const listaDeItems = await this.itemRepository.getAll();
+        
+        const output: GetItensOutput[] = [];
 
-            const output: GetItensOutput[] = [];
-
-            for(const itemdalista of listaDeItens){
-                output.push(
-                    {
-                       id: itemdalista.getId(),
-                        name: itemdalista.getName(),
-                        tipoItem:{
-                            id: itemdalista.getTipoItem().getId(),
-                            name: itemdalista.getTipoItem().getName()
-                        }
-
+        for (const itemdalista of listaDeItems){
+            output.push(
+                {
+                    id: itemdalista.getId(),
+                    name: itemdalista.getName(),
+                    tipoItem: {
+                        id: itemdalista.getTipoItem().getId(),
+                        name: itemdalista.getTipoItem().getName()
                     }
-                )
-            }
-
-            return output;
-                
-            
-
+                }
+            )
         }
 
-    
-
+        return output;
+    }
 }

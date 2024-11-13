@@ -7,9 +7,13 @@ import { GetItensUseCase } from "../use-cases/get-itens/get-itens-usecase";
 import { UpdateItemInput } from "../use-cases/update-item/update-item-input";
 import { UpdateItemUseCase } from "../use-cases/update-item/update-item-usecase";
 
+
+
+
+
+
 export class ItemController{
-    constructor(private  itemRepository: ItemRepository,
-        private tipoItemRepository: TipoItemRepository,
+    constructor(
         private repositoryFactory: RepositoryFactory
     ){}
 

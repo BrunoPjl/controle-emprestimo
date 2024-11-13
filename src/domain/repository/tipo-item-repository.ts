@@ -7,4 +7,3 @@ export interface TipoItemRepository{
     update(itemType: TipoItem): Promise<void>;
 }
 
-//beleza sobe

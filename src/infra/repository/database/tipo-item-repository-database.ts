@@ -39,4 +39,6 @@ export class TipoItemRepositoryDatabase implements TipoItemRepository{
             [itemType.getName(), itemType.getId()]);
     }
 
+    
+
 }
