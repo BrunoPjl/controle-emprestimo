@@ -18,13 +18,13 @@ export class ItemController{
     ){}
 
     async getAll(input: any) {
-        const getItems = new GetItensUseCase(this.itemRepository);
+        const getItems = new GetItensUseCase(this.repositoryFactory);
         return await getItems.execute(input);
     }
 
     async getById(id: string) {
         try {
-            const getItem = new GetItensUseCase(this.itemRepository);
+            const getItem = new GetItensUseCase(this.repositoryFactory);
             return await getItem.execute({id});
         } catch (e: any) {
             return {
@@ -46,8 +46,8 @@ export class ItemController{
         }
     }
 
-    update(input: any){
-        const updateItemUseCase = new UpdateItemUseCase(this.itemRepository);
+    /*update(input: any){
+        const updateItemUseCase = new UpdateItemUseCase(this.repositoryFactory);
         updateItemUseCase.execute(input);
     }
 
@@ -61,7 +61,7 @@ export class ItemController{
             }
         }
         
-    }
+    }*/
 
     
 

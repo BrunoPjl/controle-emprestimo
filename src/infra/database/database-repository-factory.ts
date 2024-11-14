@@ -8,10 +8,11 @@ import { Connection } from "./connection";
 export class DatabaseRepositoryFactory implements RepositoryFactory{
     constructor(private connection: Connection) {
     }
+    
     createItemRepository(): ItemRepository {
         return new ItemRepositoryDatabase(this.connection);
     }
-    createItemTypeRepository(): TipoItemRepository {
+    createTipoItemRepository(): TipoItemRepository {
         return new TipoItemRepositoryDatabase(this.connection);
     }
 

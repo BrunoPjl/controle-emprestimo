@@ -1,4 +1,4 @@
-import { config } from "dotenv";
+//import { config } from "dotenv";
 import express, { request, response } from 'express';
 import { Connection } from './infra/database/connection';
 import { TipoItemRepository } from "./domain/repository/tipo-item-repository";
@@ -15,7 +15,7 @@ import { PostgresConnection } from './infra/database/postgres-connection';
 import ItemRepositoryDatabase from './infra/repository/database/item-repository-database';
 import { DatabaseRepositoryFactory } from "./infra/database/database-repository-factory";
 
-config();
+//config();
 
 const app = express();
 const port = 3004;
@@ -45,7 +45,7 @@ console.log(dadosconexao)
 const connectionPostgreSQL = new PostgresConnection(
 	dadosconexao
 );
-const repositoryFactory = new DatabaseRepositoryFactory(connectionPostgreSQL);
+
 
 const repositoryFactory = new DatabaseRepositoryFactory(connectionPostgreSQL);
 
