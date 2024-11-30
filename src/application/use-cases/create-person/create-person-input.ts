@@ -1,6 +1,5 @@
 export type CreatePersonInput = {
-Id: string;
+id: string;
 name: string;
-   
-    
+documento: string
 }

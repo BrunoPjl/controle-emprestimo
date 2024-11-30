@@ -8,10 +8,16 @@ import { EmprestimoRepository } from "../../domain/repository/emprestimo-reposit
 import EmprestimoRepositoryDatabase from "../repository/database/empresimo-repository-database";
 import { PessoaRepository } from "../../domain/repository/pessoa-repository";
 import PessoaRepositoryDatabase from "../repository/database/pessoa-repository-database";
+import { UsuarioRepository } from "../../domain/repository/usuario-repository";
+import UsuarioRepositoryDatabase from "../repository/database/usuarios-repository-database";
 
 export class DatabaseRepositoryFactory implements RepositoryFactory{
     constructor(private connection: Connection) {
     }
+    createUsuarioRepository(): UsuarioRepository {
+      return new UsuarioRepositoryDatabase(this.connection);
+    }
+
     createPessoaRepository(): PessoaRepository {
         return new PessoaRepositoryDatabase(this.connection);
     }
@@ -25,5 +31,6 @@ export class DatabaseRepositoryFactory implements RepositoryFactory{
     createEmprestimoRepository(): EmprestimoRepository {
         return new EmprestimoRepositoryDatabase(this.connection);
     }
+    
 
 }

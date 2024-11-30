@@ -1,24 +1,25 @@
 import { config } from "dotenv";
 import express, { request, response } from 'express';
 import { Connection } from './infra/database/connection';
-import { TipoItemRepository } from "./domain/repository/tipo-item-repository";
 import { ItemController } from './application/controller/item-controller';
-import { UserController } from './application/controller/user-controller';
-import { EmprestimoController } from './application/controller/emprestimo-controller';
-import { TipoItemController } from './application/controller/tipo-item-controller';
-import { PersonController } from './application/controller/person-controller';
-import { RepositoryFactory } from './domain/repository/repository-factory';
-import PessoaRepositoryDatabase from './infra/repository/database/pessoa-repository-database';
-import EmprestimoRepositoryDatabase from './infra/repository/database/empresimo-repository-database';
-import { TipoItemRepositoryDatabase } from './infra/repository/database/tipo-item-repository-database';
+
 import { PostgresConnection } from './infra/database/postgres-connection';
-import ItemRepositoryDatabase from './infra/repository/database/item-repository-database';
+
 import { DatabaseRepositoryFactory } from "./infra/database/database-repository-factory";
+import { PersonController } from "./application/controller/person-controller";
+import { UserController } from "./application/controller/user-controller";
 
 config();
 
 const app = express();
 const port = 3004;
+const cors = require('cors')
+
+app.use(cors({
+    origin: '*', 
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true 
+}));
 
 
 app.get('/', (request, response)=> {
@@ -34,11 +35,11 @@ app.all('*', function (req, res, next) {
 		});
 
 const dadosconexao = {
-	user: process.env.DB_USERNAME || '',
-	password: process.env.DB_PASSWORD || '',
-	database: process.env.DB_DATABASE || '',
-	host: process.env.DB_HOST || '',
-	port: process.env.DB_PORT || ''
+	user: process.env.DB_USERNAME || 'postgres',
+	password: process.env.DB_PASSWORD || 'dev@123',
+	database: process.env.DB_DATABASE || 'dosguri',
+	host: process.env.DB_HOST || '159.89.46.66',
+	port: process.env.DB_PORT || '5432'
 }
 
 console.log(dadosconexao)
@@ -50,6 +51,18 @@ const connectionPostgreSQL = new PostgresConnection(
 const repositoryFactory = new DatabaseRepositoryFactory(connectionPostgreSQL);
 
 const itemController = new ItemController(repositoryFactory);
+
+const personController = new PersonController(repositoryFactory);
+
+const usuarioController = new UserController(repositoryFactory);
+
+app.get('/pessoas', async (request, response) => {
+	response.send(await personController.getAll({}));
+})
+
+app.get('/usuarios', async(request, response) =>{
+	response.send(await usuarioController.getAll({}));	
+});
 
 
 

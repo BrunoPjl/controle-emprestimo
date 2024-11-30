@@ -15,7 +15,7 @@ export class EmprestimoController{
 
 
     }
-
+/*
     update(input: any){
         const updateEmprestimoUseCase = new UpdateEmprestimoUseCase(this.repositoryFactory);
         updateEmprestimoUseCase.execute(input);
@@ -27,7 +27,7 @@ export class EmprestimoController{
         deleteItemUseCase.execute(input);
 
     }
-
+*/
     
 
 }

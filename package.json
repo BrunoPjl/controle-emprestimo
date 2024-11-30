@@ -9,27 +9,20 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-<<<<<<< HEAD
-    "@types/cors": "^2.8.17",
-=======
     "@types/bcrypt": "^5.0.2",
->>>>>>> 9a07e9fa8cd02d7197e092e0a426752f9c286928
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/uuid": "^10.0.0",
+    "dotenv": "^16.4.5",
     "typescript": "^5.6.2"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.21.0",
-    "node": "^18.20.5",
-=======
     "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
     "express": "^4.21.0",
     "jsonwebtoken": "^9.0.2",
->>>>>>> 9a07e9fa8cd02d7197e092e0a426752f9c286928
+    "node": "^18.20.5",
     "pg-promise": "^11.10.2",
     "uuid": "^9.0.0"
   },

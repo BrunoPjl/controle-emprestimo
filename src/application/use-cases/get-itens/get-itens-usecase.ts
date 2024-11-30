@@ -29,5 +29,6 @@ export class GetItensUseCase{
         }
 
         return output;
+        
     }
 }

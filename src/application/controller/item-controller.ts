@@ -46,10 +46,13 @@ export class ItemController{
         }
     }
 
-    /*update(input: any){
+    /*
+    update(input: any){
         const updateItemUseCase = new UpdateItemUseCase(this.repositoryFactory);
         updateItemUseCase.execute(input);
     }
+
+    
 
     delete(id: string) {
         try {

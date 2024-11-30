@@ -2,19 +2,20 @@ import { v4 }from 'uuid';
 
 export class Pessoa{
 
-
-    readonly id: string;
-    readonly documento: string;
+    
+    
     
  
- constructor(readonly username: string, documento: string, id?: string){
+ constructor( readonly username: string,readonly documento: string, readonly id: string)
+ {
 
-    this.username = username;
-    this.documento = documento;
+   
     if(!id){
         id = v4();
     }
     this.id = id;
+    this.username = username;
+    this.documento = documento;
  }
 
  getUserName(): string{
@@ -29,3 +30,7 @@ getDocumento(): string{
     return this.documento
 }
 }
+
+
+
+
