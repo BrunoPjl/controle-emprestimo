@@ -1,12 +1,11 @@
-type GetPessoaOutput = {
-    name: string;
-    documento: string
-    id: string;
-}
 
 export type GetUserOutput = {
     id: string;
     nameuser: string;
     password: string;
-    pessoa: GetPessoaOutput;
-}
+    pessoa: {
+        id: string;
+        nome: string; // Novo campo
+        documento: string; // Novo campo
+    };
+} 

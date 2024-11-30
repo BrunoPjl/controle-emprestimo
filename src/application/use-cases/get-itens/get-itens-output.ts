@@ -1,3 +1,5 @@
+import { ItemEPI } from "../../../domain/entity/value-object/item-epi";
+
 type GetTipoItensOutput = {
     id: string;
     name: string;
@@ -6,5 +8,6 @@ type GetTipoItensOutput = {
 export type GetItensOutput = {
     id: string;
     name: string;
-    tipoItem: GetTipoItensOutput;
+    tipoitem: GetTipoItensOutput;
+    itemEpi: ItemEPI;
 }

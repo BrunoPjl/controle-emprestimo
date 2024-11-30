@@ -5,38 +5,45 @@ import { Pessoa } from './Pesssoa';
 export class Usuario{
 
     // declaração fora do construtor
-    private nameuser: string;
-    private id: string;
-    private senha: string
-    private pessoa: Pessoa;
+    readonly id: string;
+    readonly nameuser: string; 
+    readonly password: string
+    readonly pessoa: Pessoa;
     
  // método que instancia objeto quando chamado
  // ? pode ser nulo ou não passado
- constructor( nameuser: string, pessoa: Pessoa, senha: string,id?: string  ){
+ constructor(id: string, nameuser:string, password: string, pessoa: Pessoa) {
 
-    this.nameuser = nameuser;
-    this.pessoa = pessoa;
-    this.senha = senha;
     if(!id){
         id = v4();
     }
     this.id = id;
+
+    this.nameuser = nameuser;
+    this.password = password;
+    this.pessoa = pessoa;
+    
+    
  }
-// método que obtém nome 
- getName(): string{
-    return this.nameuser
-}
+
+
 // método que obtém Id
 getId(): string{
     return this.id
 }
 
+getName(): string{
+    return this.nameuser
+}
+
+getSenha(): string{
+    return this.password
+}
+
 getPessoa(): Pessoa{
     return this.pessoa
 }
-getSenha(): string{
-    return this.senha
-}
+
 
 }
 

@@ -11,7 +11,8 @@ export default class UsuarioRepositoryDatabase implements UsuarioRepository{
     async getAll(): Promise<Usuario[]> {
 
         const output = []
-        const UsuarioData = await this.connection.execute(` select * from usuarios`);
+        const UsuarioData = await this.connection.execute(` select usuarios.id, usuarios.nome_usuario, usuarios.senha, pessoas.id, pessoas.nome, pessoas.documento 
+from usuarios LEFT join pessoas on usuarios.pessoas_id = pessoas.id`);
 
         for (const userData of UsuarioData) {
 
@@ -22,9 +23,13 @@ export default class UsuarioRepositoryDatabase implements UsuarioRepository{
             )
 
             const usuario = new Usuario(
-                userData.nameuser,
-                userData.password,
-                userData.id
+                userData.id,
+                userData.nome_usuario,
+                userData.senha,
+                pessoa
+                
+                
+                
                 )
 
             output.push(usuario)

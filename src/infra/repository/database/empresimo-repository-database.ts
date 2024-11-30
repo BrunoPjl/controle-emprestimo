@@ -6,6 +6,7 @@ import { TipoItem } from "../../../domain/entity/TipoItem";
 import { Pessoa } from "../../../domain/entity/Pesssoa";
 import { Connection } from "../../database/connection";
 import { Usuario } from "../../../domain/entity/Usuario";
+import { ItemEPI } from "../../../domain/entity/value-object/item-epi";
 
 
 
@@ -16,10 +17,18 @@ export default class EmprestimoRepositoryDatabase implements EmprestimoRepositor
 
     async getAll(): Promise<Emprestimo[]> {
         const output = []
-        const EmprestimosData = await this.connection.execute(`
-            select e.id, i.nome, ti.id as tipo_item_id, ti.nome as nome_tipoitem
-            from itens i 
-            left join tipos_item ti on i.tipo_item_id = ti.id`);
+        const EmprestimosData = await this.connection.execute(`SELECT e.id AS emprestimo_id, e.data_emprestimo, e.data_devolucao,
+                    p.id AS pessoas_id, p.nome AS pessoa_nome, p.documento AS pessoa_documento,
+                    u.id AS usuario_id, u.nome_usuario AS nome_usuario,
+                    i.id AS item_id, i.nome AS item_nome,
+                    ti.id AS tipo_item_id, ti.nome AS nome_tipoitem,
+                    ie.ca AS item_epi_ca, ie.validade AS item_epi_validade
+                FROM emprestimos e
+                LEFT JOIN pessoas p ON e.pessoas_id = p.id
+                LEFT JOIN usuarios u ON e.usuarios_id = u.id
+                LEFT JOIN itens i ON e.itens_id = i.id
+                LEFT JOIN tipos_item ti ON e.tipos_item_id = ti.id
+                LEFT JOIN itens_epi ie ON i.id = ie.itens_id`);
 
         for (const emprestimoData of EmprestimosData) {
 
@@ -42,6 +51,7 @@ export default class EmprestimoRepositoryDatabase implements EmprestimoRepositor
             )
 
             const usuario = new Usuario(
+                emprestimoData.id,
                 emprestimoData.nameuser,
                 emprestimoData.senha,
                 emprestimoData.pessoa
@@ -83,9 +93,15 @@ export default class EmprestimoRepositoryDatabase implements EmprestimoRepositor
             emprestimoData.tipo_item_id
         )
 
+        const itemEPI = new ItemEPI(
+            emprestimoData.item_epi_ca,
+            emprestimoData.item_epi_validade
+        );
+
         const item = new Item(
             emprestimoData.nome,
             tipoItem,
+            itemEPI,
             emprestimoData.id
         )
 
@@ -96,6 +112,7 @@ export default class EmprestimoRepositoryDatabase implements EmprestimoRepositor
         )
 
         const usuario = new Usuario(
+            emprestimoData.id,
             emprestimoData.nameuser,
             emprestimoData.senha,
             emprestimoData.pessoa

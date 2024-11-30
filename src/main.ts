@@ -8,6 +8,8 @@ import { PostgresConnection } from './infra/database/postgres-connection';
 import { DatabaseRepositoryFactory } from "./infra/database/database-repository-factory";
 import { PersonController } from "./application/controller/person-controller";
 import { UserController } from "./application/controller/user-controller";
+import { TipoItemController } from "./application/controller/tipo-item-controller";
+import { EmprestimoController } from "./application/controller/emprestimo-controller";
 
 config();
 
@@ -56,6 +58,10 @@ const personController = new PersonController(repositoryFactory);
 
 const usuarioController = new UserController(repositoryFactory);
 
+const tipoItemController = new TipoItemController(repositoryFactory)
+
+const emprestimoController = new EmprestimoController(repositoryFactory)
+
 app.get('/pessoas', async (request, response) => {
 	response.send(await personController.getAll({}));
 })
@@ -64,16 +70,25 @@ app.get('/usuarios', async(request, response) =>{
 	response.send(await usuarioController.getAll({}));	
 });
 
+app.get('/tipos_item', async(request, response) =>{
+	response.send(await tipoItemController.getAll({}));
+});
 
-
-
-
-
-
-
-app.get('/itens', (request, response)=> {
-   response.send( itemController.getAll({}));
+app.get('/emprestimos', async(request, response) =>{
+	response.send(await emprestimoController.);
 })
+
+
+
+
+
+
+
+app.get('/itens', async (request, response)=> {
+   response.send( await itemController.getAll({}));
+});
+
+
 
 app.post('/itens', (request, response) => {
     response.send(itemController.create(request.body));

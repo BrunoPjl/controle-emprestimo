@@ -8,7 +8,7 @@ export class TipoItem{
     
  // método que instancia objeto quando chamado
  // ? pode ser nulo ou não passado
- constructor( name: string, id?: string){
+ constructor( name: string, id: string){
 
     this.name = name;
     if(!id){

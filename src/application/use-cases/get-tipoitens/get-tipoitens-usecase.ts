@@ -1,13 +1,18 @@
+import { RepositoryFactory } from "../../../domain/repository/repository-factory";
 import { TipoItemRepository } from "../../../domain/repository/tipo-item-repository";
 import { GetTipoItensInput } from "./get-tipoitens-input";
 import { GetTipoItensOutput } from "./get-tipoitens-output";
 
 export class GetTipoItensUseCase{
 
-    constructor(readonly tipoItensRepository: TipoItemRepository){}
+    tipoItensRepository: TipoItemRepository
 
-    execute(input: GetTipoItensInput): GetTipoItensOutput[]{
-        const listaDeItens = this.tipoItensRepository.getall();
+    constructor(readonly repositoryFactory: RepositoryFactory){
+        this.tipoItensRepository = repositoryFactory.createTipoItemRepository()
+    }
+
+    async execute(input: GetTipoItensInput): Promise <GetTipoItensOutput[]>{
+        const listaDeItens = await this.tipoItensRepository.getAll();
 
         const output: GetTipoItensOutput[] = [];
 

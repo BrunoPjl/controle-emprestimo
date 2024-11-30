@@ -3,10 +3,11 @@ import { v4 }from 'uuid';
 export class Pessoa{
 
     
-    
-    
- 
- constructor( readonly username: string,readonly documento: string, readonly id: string)
+    readonly id: string
+    readonly username: string
+    readonly documento: string
+
+ constructor( id: string, username: string, documento: string )
  {
 
    

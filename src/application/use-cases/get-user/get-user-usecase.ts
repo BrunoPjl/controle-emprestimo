@@ -4,7 +4,7 @@ import { UsuarioRepository } from "../../../domain/repository/usuario-repository
 import { GetUserInput } from "./get-user-input";
 import { GetUserOutput } from "./get-user-output";
 
-export class GetUseruseCase{
+export class GetUserUseCase{
 
  userReposytory: UsuarioRepository;
 
@@ -21,18 +21,21 @@ export class GetUseruseCase{
         for(const itemdalista of listaDeItens){
             output.push(
                 {
+                    id: itemdalista.getId(),
                    nameuser: itemdalista.getName(),
-                   id: itemdalista.getId(),
                    password: itemdalista.getSenha(),
                    pessoa:{
                     id: itemdalista.getPessoa().getId(),
-                    name: itemdalista.getPessoa().getUserName(),
-                    documento: itemdalista.getPessoa().getDocumento()
+                    nome: itemdalista.getPessoa().getUserName(),
+                    documento: itemdalista.getPessoa().getDocumento(),
+                    
                    }
 
                 }
             )
+            console.log(listaDeItens); 
         }
+        
 
         return output;
             

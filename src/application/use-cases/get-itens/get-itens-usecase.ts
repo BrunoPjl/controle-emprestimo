@@ -20,10 +20,12 @@ export class GetItensUseCase{
                 {
                     id: itemdalista.getId(),
                     name: itemdalista.getName(),
-                    tipoItem: {
+                    tipoitem: {
                         id: itemdalista.getTipoItem().getId(),
-                        name: itemdalista.getTipoItem().getName()
-                    }
+                        name: itemdalista.getTipoItem().getName(),
+                    
+                    },
+                    itemEpi: itemdalista.getItemEPI()
                 }
             )
         }

@@ -1,5 +1,6 @@
 import { v4 }from 'uuid';
 import { TipoItem } from './TipoItem';
+import { ItemEPI } from './value-object/item-epi';
 
 export class Item{
 
@@ -7,16 +8,18 @@ export class Item{
     
     readonly id: string;
     private tipoitem: TipoItem;
+    private itemEpi: ItemEPI;
 
  // método que instancia objeto quando chamado
  // ? pode ser nulo ou não passado
- constructor(readonly name: string, tipoItem:TipoItem, id?: string){
+ constructor(readonly name: string, tipoItem:TipoItem, itemEpi: ItemEPI,id?: string) {
     this.tipoitem = tipoItem;
     this.name = name;
     if(!id){
         id = v4();
     }
     this.id = id;
+    this.itemEpi = itemEpi
  }
 // método que obtém nome 
  getName(): string{
@@ -31,7 +34,11 @@ getTipoItem(): TipoItem{
     return this.tipoitem
 }
 
+getItemEPI(): ItemEPI{
+    return this.itemEpi;
 }
 
-//beleza sobe
+}
+
+
 
