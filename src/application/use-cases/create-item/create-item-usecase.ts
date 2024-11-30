@@ -11,7 +11,7 @@ export class CreateItemUseCase {
     constructor(private repositoryFactory: RepositoryFactory
     ) {
         this.itemRepository = repositoryFactory.createItemRepository();
-        this.itemTypeRepository = repositoryFactory.createItemTypeRepository();
+        this.itemTypeRepository = repositoryFactory.createTipoItemRepository();
     }
     
     async execute(input: CreateItemInput) {

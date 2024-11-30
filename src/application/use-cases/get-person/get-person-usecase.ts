@@ -1,23 +1,29 @@
 
 import { PessoaRepository } from "../../../domain/repository/pessoa-repository";
+import { RepositoryFactory } from "../../../domain/repository/repository-factory";
 import { GetPersonInput } from "./get-person-input";
 import { GetPersonOutput } from "./get-person-output";
 
 export class GetPersonUseCase{
-
-    constructor(readonly personReposytory: PessoaRepository){}
+    
+    personRepository:PessoaRepository
+    constructor(readonly repositoryFactory: RepositoryFactory
+    ){
+        this.personRepository = this.repositoryFactory.createPessoaRepository()
+    }
 
     
-    execute(input: GetPersonInput): GetPersonOutput[]{
-        const listaDeItens = this.personReposytory.getall();
+  async  execute(input: GetPersonInput): Promise<GetPersonOutput[]>{
+        const listaDePessoas = await this.personRepository.getAll();
 
         const output: GetPersonOutput[] = [];
 
-        for(const itemdalista of listaDeItens){
+        for(const pessoaDalista of listaDePessoas){
             output.push(
                 {
-                    id: itemdalista.getId(),
-                    name: itemdalista.getUserName()
+                    id: pessoaDalista.getId(),
+                    name: pessoaDalista.getUserName(),
+                    documento: pessoaDalista.getDocumento()
                     }
             )
         }
