@@ -75,7 +75,7 @@ app.get('/tipos_item', async(request, response) =>{
 });
 
 app.get('/emprestimos', async(request, response) =>{
-	response.send(await emprestimoController.);
+	response.send(await emprestimoController.getAll({}));
 })
 
 

@@ -36,10 +36,15 @@ export default class EmprestimoRepositoryDatabase implements EmprestimoRepositor
                 emprestimoData.nome_tipoitem,
                 emprestimoData.tipo_item_id
             )
+            const itemEPI = new ItemEPI(
+                emprestimoData.item_epi_ca,
+                emprestimoData.item_epi_validade
+            );
 
             const item = new Item(
                 emprestimoData.nome,
                 tipoItem,
+                itemEPI,
                 emprestimoData.id
             )
 
@@ -58,11 +63,14 @@ export default class EmprestimoRepositoryDatabase implements EmprestimoRepositor
             )
 
             const emprestimo = new Emprestimo(
-                emprestimoData.usuario,
-                emprestimoData.pessoa,
+                emprestimoData.tipoItem,
                 emprestimoData.item,
-                emprestimoData.dataemprestimo,
-                emprestimoData.datadevolucao
+                emprestimoData.itemEpi,
+                emprestimoData.data_emprestimo,
+                emprestimoData.data_devolucao,
+                emprestimoData.id,
+                emprestimoData.usuario,
+                emprestimoData.pessoa
             )
 
 
@@ -119,11 +127,14 @@ export default class EmprestimoRepositoryDatabase implements EmprestimoRepositor
         )
 
         const emprestimo = new Emprestimo(
-            emprestimoData.usuario,
-            emprestimoData.pessoa,
+            emprestimoData.tipoItem,
             emprestimoData.item,
-            emprestimoData.dataemprestimo,
-            emprestimoData.datadevolucao
+            emprestimoData.itemEpi,
+            emprestimoData.data_emprestimo,
+            emprestimoData.data_devolucao,
+            emprestimoData.id,
+            emprestimoData.usuario,
+            emprestimoData.pessoa
         )
         return emprestimo;
     }

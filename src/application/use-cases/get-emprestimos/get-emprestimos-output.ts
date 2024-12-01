@@ -1,36 +1,75 @@
+import { TipoItem } from "../../../domain/entity/TipoItem";
 import { ItemEPI } from "../../../domain/entity/value-object/item-epi";
 
-type tipoItem = {
-    id: string | undefined;
-    nome: string;
-}
 
-type item = {
-    id: string | undefined;
+export type GetEmprestimosOutput = {
+  id: string;
+  tipoItem: {
+    id: string;
+    name: string;
+  };
+  item: {
+    id: string;
+    nome: string;
+    tipoItem: TipoItem;
+    itemEPI: ItemEPI;
+  };
+  dataEmprestimo: Date;
+  dataDevolucao: Date;
+  pessoa: {
+    id: string;
+    nome: string;
+    documento: string;
+  };
+  usuario: {
+    id: string;
+    username: string;
+    senha: string;
+    pessoa: {
+      id: string;
+      nome: string;
+      documento: string;
+    };
+  };
+};
+
+
+
+
+
+/* import { TipoItem } from "../../../domain/entity/TipoItem";
+import { ItemEPI } from "../../../domain/entity/value-object/item-epi";
+
+ type item = {
+    id: string ;
     nome: string;
     tipoItem: tipoItem;
-    itemEPI: ItemEPI | undefined;
+    itemEPI: ItemEPI ;
 }
 
-type usuario = {
-    id: string | undefined;
+ type usuario = {
+    id: string ;
     username: string;
-    senha: string | undefined;
+    senha: string ;
     pessoa: pessoa;
 
 }
 
 type pessoa = {
-    id: string | undefined;
+    id: string ;
     nome: string;
     documento: string;
 }
 
-export type GetAllEmprestimosOutput = {
-    id: string | undefined;
-    item: item;
-    dataEmprestimo: Date | undefined;
-    dataDevolucao: Date | undefined;
-    pessoa: pessoa;
-    usuario: usuario;
+type tipoItem = TipoItem;
+
+export type GetEmprestimosOutput = {
+  id: string;
+  item: item;
+  tipoItem: tipoItem;
+  dataEmprestimo: Date;
+  dataDevolucao: Date;
+  pessoa: pessoa;
+  usuario: usuario;
 }
+*/

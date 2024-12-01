@@ -1,30 +1,22 @@
-import { v4 }from 'uuid';
+import { v4 } from 'uuid';
 
-export class TipoItem{
+export class TipoItem {
+    private id: string; 
+  private name: string;
 
-    // declaração fora do construtor
-    private name: string;
-    private id: string;
-    
- // método que instancia objeto quando chamado
- // ? pode ser nulo ou não passado
- constructor( name: string, id: string){
-
-    this.name = name;
+  constructor(id: string,name: string) {
     if(!id){
         id = v4();
     }
     this.id = id;
- }
-// método que obtém nome 
- getName(): string{
-    return this.name
-}
-// método que obtém Id
-getId(): string{
-    return this.id
-}
+     this.name = name;
+  }
 
-}
+  getId(): string {
+    return this.id;
+  }
 
-//beleza sobe
+  getName(): string {
+    return this.name;
+  }
+}
