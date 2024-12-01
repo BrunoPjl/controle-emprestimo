@@ -50,7 +50,7 @@ export default class PessoaRepositoryDatabase implements PessoaRepository {
         await this.connection.execute(`
             insert into pessoas(id, nome, documento)
             values ($1, $2, $3)`,
-            [pessoa.id, pessoa.username, pessoa.documento]);        
+            [pessoa.getId, pessoa.getUserName, pessoa.getDocumento]);        
     }
 
     async update(pessoa: Pessoa): Promise<void> {

@@ -2,7 +2,7 @@ import { config } from "dotenv";
 import express, { request, response } from 'express';
 import { Connection } from './infra/database/connection';
 import { ItemController } from './application/controller/item-controller';
-
+import cors from 'cors';
 import { PostgresConnection } from './infra/database/postgres-connection';
 
 import { DatabaseRepositoryFactory } from "./infra/database/database-repository-factory";
@@ -15,8 +15,6 @@ config();
 
 const app = express();
 const port = 3004;
-const cors = require('cors')
-
 app.use(cors({
     origin: '*', 
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -78,21 +76,19 @@ app.get('/emprestimos', async(request, response) =>{
 	response.send(await emprestimoController.getAll({}));
 })
 
-
-
-
-
-
-
 app.get('/itens', async (request, response)=> {
    response.send( await itemController.getAll({}));
 });
 
+app.post('/pessoas', async(request, response) =>{
+	response.send(await personController.create(request.body));
+});
 
 
 app.post('/itens', (request, response) => {
     response.send(itemController.create(request.body));
 })
+
 
 
 

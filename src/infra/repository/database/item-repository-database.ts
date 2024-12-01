@@ -9,15 +9,8 @@ export default class ItemRepositoryDatabase implements ItemRepository {
 
     constructor(private connection: Connection) {
     }
-    create(item: Item): Promise<void> {
-        throw new Error("Method not implemented.");
-    }
-    update(item: Item): Promise<void> {
-        throw new Error("Method not implemented.");
-    }
-    delete(id: string): Promise<void> {
-        throw new Error("Method not implemented.");
-    }
+   
+  
     
     async getAll(): Promise<Item[]> {
         const output = []
@@ -25,7 +18,7 @@ export default class ItemRepositoryDatabase implements ItemRepository {
              SELECT i.id, i.nome, ti.id AS tipo_item_id, ti.nome AS nome_tipoitem, 
                     ie.ca, ie.validade
                 FROM itens i 
-                LEFT JOIN tipos_item ti ON i.tipo_item_id = ti.id
+                LEFT JOIN tipos_item ti ON i.tipos_item_id = ti.id
                 LEFT JOIN itens_epi ie ON i.id = ie.itens_id;`);
 
         for (const itemData of itensData) {
@@ -77,12 +70,12 @@ export default class ItemRepositoryDatabase implements ItemRepository {
 
         return item;
     }
-    /*
+    
     async create(item: Item): Promise<void> {
         await this.connection.execute(`
             insert into itens(id, nome, tipo_item_id)
             values ($1, $2, $3)`,
-            [item.getI, item.name, item.getTipoItem().getId()]);        
+            [item.getId(), item.getName, item.getTipoItem().getId()]);        
     }
 
     async update(item: Item): Promise<void> {
@@ -92,9 +85,9 @@ export default class ItemRepositoryDatabase implements ItemRepository {
             tipo_item_id = $2
             where id = $3
             `,
-            [item.name, item.getTipoItem().getId(), item.id]);
+            [item.getName, item.getTipoItem().getId(),item.getId]);
     }
     async delete(id: string): Promise<void> {
         throw new Error("Method not implemented.");
-    }*/
+    }
 }
